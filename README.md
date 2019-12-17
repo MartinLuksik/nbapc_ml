@@ -1,7 +1,7 @@
 # Machine Learning REST server
 This repository contains Machine Learning model development and a containerized micro-service - Python REST server which makes the model predictions accessible for other applications. 
 
-# Build Docker image - Machine Learning REST server
+# Docker build
 
 The microservice will serve the model passed during the build time.
 ```bash
