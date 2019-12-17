@@ -9,4 +9,6 @@ docker build -t <repo:tag> --build-arg model=<model_name>.pkl .
 ```
 
 # Run application
+```bash
 docker run -d --name mlserver -p 8000:8000 <repo:tag>
+```
