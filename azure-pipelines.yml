@@ -1,0 +1,19 @@
+pool:
+  name: Azure Pipelines
+steps:
+- task: Docker@0
+  displayName: 'Build an image - ML Server'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: martindocker22
+    dockerFile: Dockerfile
+    buildArguments: '--build-arg model=knnreg.pkl'
+    imageName: 'martindocker22/nbapc:mlserver'
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryConnection: martindocker22
+    action: 'Push an image'
+    imageName: 'martindocker22/nbapc:mlserver'
