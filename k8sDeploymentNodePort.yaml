@@ -23,6 +23,8 @@ spec:
           - name: http
             containerPort: 8000
             protocol: TCP
+      imagePullSecrets:
+      - name: docreg
 
 ---
 apiVersion: v1
