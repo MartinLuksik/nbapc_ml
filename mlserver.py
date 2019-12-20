@@ -57,7 +57,9 @@ class S(BaseHTTPRequestHandler):
         # read in the model and make prediction
         data = simplejson.loads(self.data_string)['score']
         data = np.asarray(data)
-        with open("knnreg.pkl", 'rb') as file:
+        # Load from file
+        model = os.environ["model"]
+        with open(model, 'rb') as file:
             knnreg = pickle.load(file)
         points = score(data, knnreg)[0]
 

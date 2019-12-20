@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mlserver
+  name: mlserver
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mlserver
+  template:
+    metadata:
+      labels:
+        app: mlserver
+      name: mlserver
+    spec:
+      containers:
+      - name: mlserver
+        image: martindocker22/nbapc:mlserver
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlserver
+  namespace: default
+  labels:
+    app: mlserver
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: mlserver
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mlserver-ingress
+  namespace: default
+spec:
+  rules:
+  - host: prediction.mldedicated.net
+    http:
+      paths:
+      - backend:
+          serviceName: my-spark-cluster-ui
+          servicePort: 8000
