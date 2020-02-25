@@ -54,5 +54,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: my-spark-cluster-ui
+          serviceName: mlserver
           servicePort: 8000
